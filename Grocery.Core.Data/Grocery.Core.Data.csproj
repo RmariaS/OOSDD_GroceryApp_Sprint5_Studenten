@@ -4,6 +4,9 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Include="Repositories\ProductCategoryRepository.cs" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Grocery.Core\Grocery.Core.csproj" />
