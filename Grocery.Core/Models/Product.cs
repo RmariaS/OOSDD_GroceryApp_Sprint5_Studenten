@@ -14,7 +14,7 @@ namespace Grocery.Core.Models
 
         // Prijs: observable, gebruikt voor UC14
         [ObservableProperty]
-        private decimal price;
+        private decimal _price;
 
         // THT-datum (UC15): niet observable, maar wel bindbaar in XAML
         public DateOnly ShelfLife { get; set; }
