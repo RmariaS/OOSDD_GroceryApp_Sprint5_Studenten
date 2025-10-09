@@ -36,7 +36,7 @@ namespace Grocery.App
             builder.Services.AddSingleton<IProductRepository, ProductRepository>();
             builder.Services.AddSingleton<IClientRepository, ClientRepository>();
 
-            // VOEG DEZE TOE - Dit was het probleem!
+            
             builder.Services.AddSingleton<ICategoryRepository, CategoryRepository>();
             builder.Services.AddSingleton<IProductCategoryRepository, ProductCategoryRepository>();
 
