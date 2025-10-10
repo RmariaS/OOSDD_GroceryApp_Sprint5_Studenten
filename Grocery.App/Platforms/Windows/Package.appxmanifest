@@ -13,7 +13,7 @@
   <Properties>
     <DisplayName>$placeholder$</DisplayName>
     <PublisherDisplayName>User Name</PublisherDisplayName>
-    <Logo>$placeholder$.png</Logo>
+    <Logo>Assets\appicon.png</Logo>
   </Properties>
 
   <Dependencies>
@@ -28,13 +28,19 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="$placeholder$"
-        Description="$placeholder$"
-        Square150x150Logo="$placeholder$.png"
-        Square44x44Logo="$placeholder$.png"
+        DisplayName="Assets\Splash"
+        Description="Splash"
+        Square150x150Logo="Assets\Splash.png"
+        Square44x44Logo="Assets\Splash.png"
         BackgroundColor="transparent">
-        <uap:DefaultTile Square71x71Logo="$placeholder$.png" Wide310x150Logo="$placeholder$.png" Square310x310Logo="$placeholder$.png" />
-        <uap:SplashScreen Image="$placeholder$.png" />
+        <uap:DefaultTile Square71x71Logo="Assets\Splash.png" Wide310x150Logo="Assets\Splash.png" Square310x310Logo="Assets\Splash.png" >
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo"/>
+            <uap:ShowOn Tile="wide310x150Logo"/>
+            <uap:ShowOn Tile="square310x310Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
+		  <uap:SplashScreen Image="Assets\Splash.png" BackgroundColor="#512BD4" />
       </uap:VisualElements>
     </Application>
   </Applications>

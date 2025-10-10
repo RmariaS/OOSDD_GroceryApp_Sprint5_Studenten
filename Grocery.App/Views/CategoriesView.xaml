@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Grocery.App.Views"
+             x:Class="Grocery.App.Views.CategoriesView"
+             Title="Categorieën">
+    <VerticalStackLayout Padding="16">
+        <Button Text="Nieuwe categorie" 
+                Command="{Binding AddCategoryCommand}" 
+                HorizontalOptions="Start" 
+                Margin="0,0,0,16"/>
+        <CollectionView ItemsSource="{Binding Categories}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="12" ColumnDefinitions="*, Auto, Auto">
+                        <Label Text="{Binding Name}" 
+                               FontSize="18" 
+                               VerticalOptions="Center"/>
+                        <Button Text="Producten" 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:CategoriesView}}, Path=BindingContext.NavigateToProductCategoriesCommand}"
+                                CommandParameter="{Binding}"
+                                Grid.Column="1"
+                                Margin="8,0"/>
+                        <Button Text="Verwijder" 
+                                TextColor="Red"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:CategoriesView}}, Path=BindingContext.DeleteCategoryCommand}"
+                                CommandParameter="{Binding}"
+                                Grid.Column="2"
+                                Margin="8,0"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
