@@ -36,45 +36,38 @@
 # For a complete CI/CD sample to get started with GitHub Action workflows for Desktop Applications,
 # refer to https://github.com/microsoft/github-actions-for-desktop-apps
 
-name: .NET Build and Test
+name: .NET Core Desktop
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
-
-env:
-  Solution_Name: 'Grocery.sln'
-  Test_Project_Path: 'Testcore/Testcore.csproj'
-  Wap_Project_Directory: ''
-  Wap_Project_Path: ''
-  Configuration: 'Release'
+    branches: [ "main" ]
 
 jobs:
   build:
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
     runs-on: windows-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
-    - name: Setup .NET
+    - name: Install .NET Core
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'  
+        dotnet-version: 8.0.x
 
     - name: Restore dependencies
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+      run: dotnet restore TestCore/TestCore.csproj
 
-    - name: Build solution
-      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration
+    - name: Build TestCore
+      run: dotnet build TestCore/TestCore.csproj --configuration ${{ matrix.configuration }} --no-restore
 
-    - name: Run unit tests
-      if: env.Test_Project_Path != ''
-      run: dotnet test $env:Test_Project_Path --configuration $env:Configuration
-
-    
-     
-       
-      
+    - name: Execute unit tests
+      run: dotnet test TestCore/TestCore.csproj --configuration ${{ matrix.configuration }} --no-build --verbosity normal
